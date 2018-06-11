@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tituloVista"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tit_main_activity"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+    <TextView
+        android:id="@+id/txtNombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/lblNombreCliente"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+    <EditText
+        android:id="@+id/txtNombreCliente"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/lblDetallePedido"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/lblDetallePedido" />
+
+    <EditText
+        android:id="@+id/txtDetallePedido"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:lines="5"
+        android:inputType="textMultiLine" />
+
+    <RadioGroup
+        android:id="@+id/rgTipoPedido"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radBtnDelivery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/lblDelivery" />
+
+        <RadioButton
+            android:id="@+id/radBtnMesa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/lblReservarMesa" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:id="@+id/layoutCheckbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            android:id="@+id/cbIncluirPropina"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/cbIncluirPropina" />
+
+        <CheckBox
+            android:id="@+id/cbPermitirCancelar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/cbPermiteCancelar" />
+
+        <CheckBox
+            android:id="@+id/cbBebidaXL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/cbBebidaXL" />
+    </LinearLayout>
+
+    <Switch
+        android:id="@+id/swtNotificaciones"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:showText="true"
+        android:textOff="@string/lblNotificacionesOff"
+        android:textOn="@string/lblNotificacionesActivadas" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ToggleButton"
+        android:textOff="@string/lblPagoEfectivo"
+        android:textOn="@string/lblPagarDebito" />
+
+    <LinearLayout
+        android:id="@+id/layoutBotonera"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnConfirmar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/btnConfirmar" />
+
+        <Button
+            android:id="@+id/btnCancelar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/btnCancelarLbl" />
+    </LinearLayout>
+</LinearLayout>
