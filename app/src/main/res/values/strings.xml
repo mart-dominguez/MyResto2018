@@ -5,8 +5,8 @@
     <string name="cbIncluirPropina">Incluir Propinas</string>
     <string name="cbPermiteCancelar">Permitir Cancelar</string>
     <string name="cbBebidaXL">Bebida XL</string>
-    <string name="lblReservarMesa" >Reservar Mesa</string>
-    <string name="lblDelivery" >Envio a domicilio</string>
+    <string name="lblReservarMesa">Reservar Mesa</string>
+    <string name="lblDelivery">Envio a domicilio</string>
     <string name="lblNotificacionesActivadas">Notificar confirmacion</string>
     <string name="lblNotificacionesOff">No notificar</string>
     <string name="lblPagarDebito">Debita de cuenta</string>
