@@ -19,17 +19,7 @@ public class Pedido {
 
     @Override
     public String toString() {
-        return "Pedido{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", pedido='" + pedido + '\'' +
-                ", envioDomicilio=" + envioDomicilio +
-                ", bebidaXL=" + bebidaXL +
-                ", permiteCancelar=" + permiteCancelar +
-                ", incluyePropina=" + incluyePropina +
-                ", enviarNotificaciones=" + enviarNotificaciones +
-                ", pagoAuotomatico=" + pagoAuotomatico +
-                '}';
+        return nombre + " - " + pedido;
     }
 
     public Integer getId() {
