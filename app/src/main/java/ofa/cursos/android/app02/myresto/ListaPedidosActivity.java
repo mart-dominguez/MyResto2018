@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import ofa.cursos.android.app02.myresto.modelo.Pedido;
 import ofa.cursos.android.app02.myresto.modelo.PedidoDAO;
@@ -39,6 +41,26 @@ public class ListaPedidosActivity extends AppCompatActivity {
                 startActivity(nuevoPedidoIntent);
             }
         });
+
+        this.listaPedidos.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                // ListView Clicked item index
+                int itemPosition     = position;
+                // ListView Clicked item value
+                Pedido  itemValue    = (Pedido) listaPedidos.getItemAtPosition(position);
+                pedidoDAO.eliminar(itemValue);
+                adaptadorLista.notifyDataSetChanged();
+
+                // Show Alert
+                Toast.makeText(getApplicationContext(),
+                        "Borrar elemento de posicion :"+itemPosition+"  Id: " +itemValue.getId()+ " nombre: "+itemValue.getNombre() , Toast.LENGTH_LONG)
+                        .show();
+
+                return false;
+            }
+        });
+
 
     }
 }

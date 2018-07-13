@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="listaProductos">
+        <item>1|coca|19.36</item>
+        <item>2|hamburguesa|99.36</item>
+        <item>3|milanesa|99.36</item>
+        <item>4|pancho|99.36</item>
+    </array>
+</resources>

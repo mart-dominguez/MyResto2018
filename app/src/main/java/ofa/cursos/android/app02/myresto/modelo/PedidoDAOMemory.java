@@ -13,6 +13,11 @@ public class PedidoDAOMemory implements  PedidoDAO{
     }
 
     @Override
+    public void eliminar(Pedido pedido) {
+        REPOSITORIO_PEDIDOS.remove(pedido);
+    }
+
+    @Override
     public List<Pedido> listarTodos() {
         return REPOSITORIO_PEDIDOS;
     }

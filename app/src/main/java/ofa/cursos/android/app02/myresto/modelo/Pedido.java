@@ -1,5 +1,8 @@
 package ofa.cursos.android.app02.myresto.modelo;
 
+import java.util.List;
+import java.util.Objects;
+
 public class Pedido {
     private Integer id;
     private String nombre;
@@ -10,6 +13,7 @@ public class Pedido {
     private boolean incluyePropina;
     private boolean enviarNotificaciones;
     private boolean pagoAuotomatico;
+    private List<ProductoMenu> itemsPedidos;
 
     private static int idGenerator = 0;
 
@@ -20,6 +24,20 @@ public class Pedido {
     @Override
     public String toString() {
         return nombre + " - " + pedido;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pedido pedido = (Pedido) o;
+        return Objects.equals(id, pedido.id);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id);
     }
 
     public Integer getId() {
