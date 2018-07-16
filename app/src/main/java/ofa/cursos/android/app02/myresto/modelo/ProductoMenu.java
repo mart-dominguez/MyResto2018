@@ -2,7 +2,7 @@ package ofa.cursos.android.app02.myresto.modelo;
 
 public class ProductoMenu {
     int id;
-    int nombre;
+    String nombre;
     double precio;
 
     public int getId() {
@@ -13,11 +13,11 @@ public class ProductoMenu {
         this.id = id;
     }
 
-    public int getNombre() {
+    public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(int nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
@@ -27,5 +27,11 @@ public class ProductoMenu {
 
     public void setPrecio(double precio) {
         this.precio = precio;
+    }
+
+
+    @Override
+    public String toString() {
+        return this.nombre + " - " + this.precio ;
     }
 }

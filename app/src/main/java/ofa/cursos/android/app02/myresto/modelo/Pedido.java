@@ -1,5 +1,6 @@
 package ofa.cursos.android.app02.myresto.modelo;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -13,17 +14,22 @@ public class Pedido {
     private boolean incluyePropina;
     private boolean enviarNotificaciones;
     private boolean pagoAuotomatico;
-    private List<ProductoMenu> itemsPedidos;
+    private List<DetallePedido> itemsPedidos;
 
     private static int idGenerator = 0;
 
     public Pedido(){
         this.id = ++Pedido.idGenerator;
+        this.itemsPedidos = new ArrayList<>();
     }
 
     @Override
     public String toString() {
-        return nombre + " - " + pedido;
+        return nombre;
+    }
+
+    public void addItemDetalle(DetallePedido prd){
+        this.itemsPedidos.add(prd);
     }
 
     @Override

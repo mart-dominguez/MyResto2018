@@ -10,17 +10,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.Arrays;
+
 import ofa.cursos.android.app02.myresto.modelo.Pedido;
 import ofa.cursos.android.app02.myresto.modelo.PedidoDAO;
 import ofa.cursos.android.app02.myresto.modelo.PedidoDAOMemory;
+import ofa.cursos.android.app02.myresto.modelo.ProductoDAO;
+import ofa.cursos.android.app02.myresto.modelo.ProductoDAOMemory;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button btnConfirmar;
+    private Button btnAddProducto;
     private EditText txtNombre;
     private Pedido pedidoActual;
 
     private PedidoDAO pedidoDao;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
         pedidoDao = new PedidoDAOMemory();
 
         pedidoActual = new Pedido();
-
         txtNombre = (EditText) findViewById(R.id.txtNombreCliente);
+
 
         btnConfirmar = (Button) findViewById(R.id.btnConfirmar);
         btnConfirmar.setOnClickListener(new View.OnClickListener() {
@@ -51,6 +57,16 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent listaPedidosAct  = new Intent(MainActivity.this,ListaPedidosActivity.class);
                 startActivity(listaPedidosAct );
+            }
+        });
+
+        btnAddProducto = (Button) findViewById(R.id.btnAddProducto);
+        btnAddProducto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent listaMenu= new Intent(MainActivity.this,DetallePedidoActivity.class);
+                startActivity(listaMenu);
+
             }
         });
     }
