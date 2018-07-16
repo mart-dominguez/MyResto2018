@@ -4,9 +4,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class ProductoMenu implements Parcelable{
-    int id;
-    String nombre;
-    double precio;
+    private int id;
+    private String nombre;
+    private double precio;
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {

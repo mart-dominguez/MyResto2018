@@ -25,7 +25,7 @@ public class DetallePedidoActivity extends AppCompatActivity {
     private TextView txtCantidad;
     private Button btnMenosProducto;
     private Button btnMasProducto;
-    private Button btnConfirmarPedido;
+    private Button btnAgregarProducto;
 
     private Integer cantidadProducto;
     private ProductoMenu productoElegido;
@@ -42,7 +42,7 @@ public class DetallePedidoActivity extends AppCompatActivity {
         cantidadProducto = 0;
         txtCantidad.setText(cantidadProducto.toString());
 
-        btnConfirmarPedido = (Button) findViewById(R.id.btnAddProducto);
+        btnAgregarProducto = (Button) findViewById(R.id.btnAddProducto);
 
         String[] listaProductos = getResources().getStringArray(R.array.listaProductos);
         productoDao.cargarDatos(listaProductos);
@@ -80,7 +80,7 @@ public class DetallePedidoActivity extends AppCompatActivity {
             }
         });
 
-        btnConfirmarPedido.setOnClickListener(new View.OnClickListener() {
+        btnAgregarProducto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("APP_MY_RESTO"," PRODUCTOa "+productoElegido.toString()+"  CANTIDADdx: "+cantidadProducto);
