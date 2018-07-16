@@ -1,6 +1,9 @@
 package ofa.cursos.android.app02.myresto.modelo;
 
-public class DetallePedido {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class DetallePedido implements Parcelable{
     private int id;
     private ProductoMenu productoPedido;
     private int cantidad;
@@ -27,5 +30,15 @@ public class DetallePedido {
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
     }
 }

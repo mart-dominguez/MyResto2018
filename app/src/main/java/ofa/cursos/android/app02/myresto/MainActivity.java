@@ -12,17 +12,20 @@ import android.widget.Toast;
 
 import java.util.Arrays;
 
+import ofa.cursos.android.app02.myresto.modelo.DetallePedido;
 import ofa.cursos.android.app02.myresto.modelo.Pedido;
 import ofa.cursos.android.app02.myresto.modelo.PedidoDAO;
 import ofa.cursos.android.app02.myresto.modelo.PedidoDAOMemory;
 import ofa.cursos.android.app02.myresto.modelo.ProductoDAO;
 import ofa.cursos.android.app02.myresto.modelo.ProductoDAOMemory;
+import ofa.cursos.android.app02.myresto.modelo.ProductoMenu;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button btnConfirmar;
     private Button btnAddProducto;
     private EditText txtNombre;
+    private EditText txtDetalle;
     private Pedido pedidoActual;
 
     private PedidoDAO pedidoDao;
@@ -37,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
 
         pedidoActual = new Pedido();
         txtNombre = (EditText) findViewById(R.id.txtNombreCliente);
+        txtDetalle = (EditText) findViewById(R.id.txtDetallePedido);
+
 
 
         btnConfirmar = (Button) findViewById(R.id.btnConfirmar);
@@ -65,9 +70,25 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent listaMenu= new Intent(MainActivity.this,DetallePedidoActivity.class);
-                startActivity(listaMenu);
-
+                startActivityForResult(listaMenu,999);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode==RESULT_OK){
+            if(requestCode==999){
+                int cantidad = data.getIntExtra("cantidad",0);
+                ProductoMenu prod= (ProductoMenu) data.getSerializableExtra("producto");
+                DetallePedido detalle = new DetallePedido();
+                detalle.setCantidad(cantidad);
+                detalle.setProductoPedido(prod);
+                pedidoActual.addItemDetalle(detalle);
+                txtDetalle.getText().append(prod.getNombre()+ " $"+(prod.getPrecio()*cantidad));
+            }
+        }
+
     }
 }
