@@ -83,13 +83,13 @@ public class DetallePedidoActivity extends AppCompatActivity {
         btnConfirmarPedido.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("APP_MY_RESTO"," PRODUCTO "+productoElegido.toString()+"  CANTIDAD: "+cantidadProducto);
-                Toast.makeText(DetallePedidoActivity.this," PRODUCTO "+productoElegido.toString()+"  CANTIDAD: "+cantidadProducto,Toast.LENGTH_LONG).show();
+                Log.d("APP_MY_RESTO"," PRODUCTOa "+productoElegido.toString()+"  CANTIDADdx: "+cantidadProducto);
+                Toast.makeText(DetallePedidoActivity.this," PRODUCTaO "+productoElegido.toString()+"  CANTIDAD: "+cantidadProducto,Toast.LENGTH_LONG).show();
                 Intent intent = new Intent();
                 intent.putExtra("producto", productoElegido);
                 intent.putExtra("cantidad", cantidadProducto);
                 setResult(RESULT_OK, intent);
-                finishActivity(999);
+                finish();
             }
         });
     }

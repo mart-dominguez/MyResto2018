@@ -78,15 +78,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Log.d("APP_MY_RESTO"," resultCode "+resultCode+"  requestCode: "+requestCode+ " OK("+RESULT_OK+")");
+
         if(resultCode==RESULT_OK){
             if(requestCode==999){
                 int cantidad = data.getIntExtra("cantidad",0);
-                ProductoMenu prod= (ProductoMenu) data.getSerializableExtra("producto");
+                ProductoMenu prod= (ProductoMenu) data.getParcelableExtra("producto");
                 DetallePedido detalle = new DetallePedido();
                 detalle.setCantidad(cantidad);
                 detalle.setProductoPedido(prod);
                 pedidoActual.addItemDetalle(detalle);
-                txtDetalle.getText().append(prod.getNombre()+ " $"+(prod.getPrecio()*cantidad));
+                txtDetalle.getText().append(prod.getNombre()+ " $"+(prod.getPrecio()*cantidad)+"\r\n");
             }
         }
 
