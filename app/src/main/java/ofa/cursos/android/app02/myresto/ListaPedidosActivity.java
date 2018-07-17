@@ -23,12 +23,14 @@ public class ListaPedidosActivity extends AppCompatActivity {
     private ListView listaPedidos;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_pedidos);
         this.pedidoDAO = new PedidoDAOMemory();
-        this.adaptadorLista = new ArrayAdapter<>(ListaPedidosActivity.this,android.R.layout.simple_list_item_1,pedidoDAO.listarTodos());
+//        this.adaptadorLista = new ArrayAdapter<>(ListaPedidosActivity.this,android.R.layout.simple_list_item_1,pedidoDAO.listarTodos());
+        this.adaptadorLista = new PedidoAdapter(ListaPedidosActivity.this,pedidoDAO.listarTodos());
         this.btnNuevoPedido = (Button) findViewById(R.id.btnNuevosPedidos);
         this.listaPedidos = (ListView) findViewById(R.id.listaPedidos);
 

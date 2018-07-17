@@ -15,7 +15,7 @@ public class Pedido {
     private boolean enviarNotificaciones;
     private boolean pagoAuotomatico;
     private List<DetallePedido> itemsPedidos;
-
+    private Estado estado;
     private static int idGenerator = 0;
 
     public Pedido(){
@@ -118,5 +118,19 @@ public class Pedido {
         this.pagoAuotomatico = pagoAuotomatico;
     }
 
+    public List<DetallePedido> getItemsPedidos() {
+        return itemsPedidos;
+    }
 
+    public void setItemsPedidos(List<DetallePedido> itemsPedidos) {
+        this.itemsPedidos = itemsPedidos;
+    }
+
+    public Estado getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
 }

@@ -45,7 +45,11 @@
         android:ems="10"
         android:lines="5"
         android:inputType="textMultiLine" />
-
+    <TextView
+        android:id="@+id/lblMontoTotal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/lblDetallePedido" />
     <RadioGroup
         android:id="@+id/rgTipoPedido"
         android:layout_width="match_parent"

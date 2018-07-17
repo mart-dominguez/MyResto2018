@@ -43,6 +43,7 @@ public class DetallePedidoActivity extends AppCompatActivity {
         txtCantidad.setText(cantidadProducto.toString());
 
         btnAgregarProducto = (Button) findViewById(R.id.btnAddProducto);
+        btnAgregarProducto.setEnabled(false);
 
         String[] listaProductos = getResources().getStringArray(R.array.listaProductos);
         productoDao.cargarDatos(listaProductos);
@@ -66,15 +67,16 @@ public class DetallePedidoActivity extends AppCompatActivity {
                 if(cantidadProducto>0) {
                     cantidadProducto--;
                     txtCantidad.setText(cantidadProducto.toString());
+                    if(cantidadProducto==0) btnAgregarProducto.setEnabled(false);
                 }
             }
         });
-
         btnMasProducto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(cantidadProducto<10) {
                     cantidadProducto++;
+                    btnAgregarProducto.setEnabled(true);
                     txtCantidad.setText(cantidadProducto.toString());
                 }
             }

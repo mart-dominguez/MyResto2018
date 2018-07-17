@@ -13,6 +13,6 @@
     <string name="lblPagoEfectivo">Pagar al entregar</string>
     <string name="btnConfirmar">Confirmar</string>
     <string name="btnCancelarLbl">Cancelar</string>
-    <string name="lblDetallePedido">Ingrese su pedido detallado</string>
+    <string name="lblDetallePedido">0.00</string>
 
 </resources>

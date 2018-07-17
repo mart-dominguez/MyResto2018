@@ -21,4 +21,13 @@ public class PedidoDAOMemory implements  PedidoDAO{
     public List<Pedido> listarTodos() {
         return REPOSITORIO_PEDIDOS;
     }
+
+
+    @Override
+    public Pedido buscarPorId(Integer id) {
+        for(Pedido unPedido: REPOSITORIO_PEDIDOS){
+            if(unPedido.getId().equals(id)) return unPedido;
+        }
+        return null;
+    }
 }
