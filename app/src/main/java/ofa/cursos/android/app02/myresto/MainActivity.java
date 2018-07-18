@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     private Switch swNotiifcar;
     private ToggleButton toglePagaEntrega;
 
+    private Boolean flagUpdate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         swNotiifcar = (Switch) findViewById(R.id.swtNotificaciones);
         toglePagaEntrega = (ToggleButton) findViewById(R.id.toggleButton);
 
-
+        flagUpdate = false;
         btnConfirmar = (Button) findViewById(R.id.btnConfirmar);
         btnConfirmar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,13 +81,28 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("APP_MY_RESTO","Pedido confirmado!!!! ");
                 Log.d("APP_MY_RESTO",pedidoActual.toString());
 
-                pedidoDao.agregar(pedidoActual);
+                if( flagUpdate ){
+                    pedidoDao.actualizar(pedidoActual);
+                    flagUpdate= false;
+                }else{
+                    pedidoDao.agregar(pedidoActual);
+                }
+
 
                 // limpiar la variable para poder cargar un nuevo pedido
                 pedidoActual = new Pedido();
                 // limpiar el edit text en la pantalla
                 txtNombre.setText("");
-
+                txtDetalle.setText("");
+                tvMontoTotal.setText("$0.0");
+                cbBebidaXL.setChecked(false);
+                cbIncluirPropina.setChecked(false);
+                swNotiifcar.setChecked(false);
+                RadioButton rbDelivery = (RadioButton) findViewById(R.id.radBtnDelivery);
+                RadioButton rbMesa = (RadioButton) findViewById(R.id.radBtnMesa);
+                    rbDelivery.setChecked(false);
+                    rbMesa.setChecked(false);
+                toglePagaEntrega.setChecked(false);
                 Intent listaPedidosAct  = new Intent(MainActivity.this,ListaPedidosActivity.class);
                 startActivity(listaPedidosAct );
             }
@@ -104,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
             int idPedidoSeleccionado = getIntent().getExtras().getInt("idPedido",-1);
             if(idPedidoSeleccionado>0){
                 this.loadPedido(idPedidoSeleccionado);
+                flagUpdate = true;
             }
         }
     }
@@ -133,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadPedido(int id){
+        flagUpdate = true;
         pedidoActual= this.pedidoDao.buscarPorId(id);
         txtNombre.setText(pedidoActual.getNombre());
         cbBebidaXL.setChecked(pedidoActual.isBebidaXL());

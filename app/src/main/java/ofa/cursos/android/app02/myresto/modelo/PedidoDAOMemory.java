@@ -13,6 +13,12 @@ public class PedidoDAOMemory implements  PedidoDAO{
     }
 
     @Override
+    public void actualizar(Pedido pedido) {
+        int indice = REPOSITORIO_PEDIDOS.indexOf(pedido);
+        REPOSITORIO_PEDIDOS.set(indice,pedido);
+    }
+
+    @Override
     public void eliminar(Pedido pedido) {
         REPOSITORIO_PEDIDOS.remove(pedido);
     }
