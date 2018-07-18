@@ -32,7 +32,8 @@ public class PedidoAdapter extends ArrayAdapter<Pedido> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        View fila = LayoutInflater.from(this.context).inflate(R.layout.fila_pedido,parent,false);
+        View fila = convertView;
+        if(fila==null) fila = LayoutInflater.from(this.context).inflate(R.layout.fila_pedido,parent,false);
         Pedido pedido = this.listaPedidos.get(position);
         double monto = 0.0;
         for(DetallePedido det : pedido.getItemsPedidos()){
