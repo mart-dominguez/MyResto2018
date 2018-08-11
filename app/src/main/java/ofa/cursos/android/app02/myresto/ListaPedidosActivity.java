@@ -17,6 +17,7 @@ import android.widget.Toast;
 import ofa.cursos.android.app02.myresto.modelo.Pedido;
 import ofa.cursos.android.app02.myresto.modelo.PedidoDAO;
 import ofa.cursos.android.app02.myresto.modelo.PedidoDAOMemory;
+import ofa.cursos.android.app02.myresto.modelo.PedidoDaoJson;
 
 public class ListaPedidosActivity extends AppCompatActivity {
 
@@ -32,7 +33,9 @@ public class ListaPedidosActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_pedidos);
-        this.pedidoDAO = new PedidoDAOMemory();
+       // this.pedidoDAO = new PedidoDAOMemory();
+        pedidoDAO = new PedidoDaoJson(this);
+
 //        this.adaptadorLista = new ArrayAdapter<>(ListaPedidosActivity.this,android.R.layout.simple_list_item_1,pedidoDAO.listarTodos());
         this.adaptadorLista = new PedidoAdapter(ListaPedidosActivity.this,pedidoDAO.listarTodos());
         this.btnNuevoPedido = (Button) findViewById(R.id.btnNuevosPedidos);

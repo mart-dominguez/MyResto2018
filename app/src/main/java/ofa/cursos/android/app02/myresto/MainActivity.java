@@ -23,6 +23,7 @@ import ofa.cursos.android.app02.myresto.modelo.Estado;
 import ofa.cursos.android.app02.myresto.modelo.Pedido;
 import ofa.cursos.android.app02.myresto.modelo.PedidoDAO;
 import ofa.cursos.android.app02.myresto.modelo.PedidoDAOMemory;
+import ofa.cursos.android.app02.myresto.modelo.PedidoDaoJson;
 import ofa.cursos.android.app02.myresto.modelo.ProductoDAO;
 import ofa.cursos.android.app02.myresto.modelo.ProductoDAOMemory;
 import ofa.cursos.android.app02.myresto.modelo.ProductoMenu;
@@ -51,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        pedidoDao = new PedidoDAOMemory();
-
+       // pedidoDao = new PedidoDAOMemory();
+        pedidoDao = new PedidoDaoJson(this);
         pedidoActual = new Pedido();
         txtNombre = (EditText) findViewById(R.id.txtNombreCliente);
         txtDetalle = (EditText) findViewById(R.id.txtDetallePedido);

@@ -1,5 +1,9 @@
 package ofa.cursos.android.app02.myresto.modelo;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -25,7 +29,7 @@ public class Pedido {
 
     @Override
     public String toString() {
-        return nombre;
+        return nombre+ " "+ estado;
     }
 
     public void addItemDetalle(DetallePedido prd){
@@ -149,6 +153,69 @@ public class Pedido {
     public void entregar(){
         if(this.estado==Estado.EN_ENVIO){
             this.estado = Estado.ENTREGADO;
+        }
+    }
+
+    public JSONObject toJson(){
+        JSONObject unPedido = new JSONObject();
+        try {
+            unPedido.put("id",this.getId());
+            unPedido.put("pagoAutomatico",this.isPagoAuotomatico());
+            unPedido.put("envioNotificacion",this.isEnviarNotificaciones());
+            unPedido.put("envioDomicilio",this.isEnvioDomicilio());
+            unPedido.put("incluyePropina",this.isIncluyePropina());
+            unPedido.put("bebidaXL",this.isBebidaXL());
+            unPedido.put("permiteCancelar",this.isPermiteCancelar());
+            unPedido.put("nombre",this.getNombre());
+            unPedido.put("estado",this.getEstado().toString());
+            JSONArray arregloDetalle = new JSONArray();
+            for(DetallePedido dp : this.getItemsPedidos()){
+                JSONObject unDetallePedido = new JSONObject();
+                unDetallePedido.put("id",dp.getId());
+                unDetallePedido.put("cantidad",dp.getCantidad());
+                JSONObject prod = new JSONObject();
+                prod.put("id",dp.getProductoPedido().getId());
+                prod.put("nombre",dp.getProductoPedido().getNombre());
+                prod.put("precio",dp.getProductoPedido().getPrecio());
+                unDetallePedido.put("producto",prod);
+                arregloDetalle.put(unDetallePedido);
+            }
+            unPedido.put("detalle",arregloDetalle);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return unPedido;
+    }
+
+    public void loadFromJson(JSONObject fila ){
+        try {
+            this.setId(fila.getInt("id"));
+            this.setPagoAuotomatico(fila.getBoolean("pagoAutomatico"));
+            this.setEnviarNotificaciones(fila.getBoolean("envioNotificacion"));
+            this.setEnvioDomicilio(fila.getBoolean("envioDomicilio"));
+            this.setIncluyePropina(fila.getBoolean("incluyePropina"));
+            this.setBebidaXL(fila.getBoolean("bebidaXL"));
+            this.setPermiteCancelar(fila.getBoolean("permiteCancelar"));
+            this.setNombre(fila.getString("nombre"));
+            this.setEstado(Estado.valueOf(fila.getString("estado")));
+            if(fila.getJSONArray("detalle").length()>0){
+                this.setItemsPedidos(new ArrayList<DetallePedido>());
+                JSONArray detallePedido = fila.getJSONArray("detalle");
+                for(int j =0;j<detallePedido.length();j++){
+                    DetallePedido detalleAux = new DetallePedido();
+                    JSONObject filaDetalle = detallePedido.getJSONObject(j);
+                    detalleAux.setCantidad(filaDetalle.getInt("cantidad"));
+                    detalleAux.setId(filaDetalle.getInt("id"));
+                    JSONObject elProducto = filaDetalle.getJSONObject("producto");
+                    ProductoMenu prd = new ProductoMenu();
+                    prd.setId(elProducto.getInt("id"));
+                    prd.setNombre(elProducto.getString("nombre"));
+                    prd.setPrecio(elProducto.getDouble("precio"));
+                    detalleAux.setProductoPedido(prd);
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 
