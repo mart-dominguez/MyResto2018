@@ -15,8 +15,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import ofa.cursos.android.app02.myresto.modelo.Pedido;
 import ofa.cursos.android.app02.myresto.modelo.ProductoDAO;
+import ofa.cursos.android.app02.myresto.modelo.ProductoDAOHttp;
 import ofa.cursos.android.app02.myresto.modelo.ProductoDAOMemory;
 import ofa.cursos.android.app02.myresto.modelo.ProductoMenu;
 
@@ -24,6 +27,7 @@ public class DetallePedidoActivity extends AppCompatActivity {
     private ArrayAdapter<ProductoMenu> adaptadorLista;
     private ListView listaMenu;
     private ProductoDAO productoDao;
+    private List<ProductoMenu> listaProductos;
 
     private TextView txtCantidad;
     private Button btnMenosProducto;
@@ -38,7 +42,7 @@ public class DetallePedidoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_pedido);
-        productoDao = new ProductoDAOMemory();
+        productoDao = new ProductoDAOHttp();
 
         btnMasProducto = (Button) findViewById(R.id.btnMasProducto);
         btnMenosProducto = (Button) findViewById(R.id.btnMenosProducto);
@@ -50,11 +54,23 @@ public class DetallePedidoActivity extends AppCompatActivity {
         btnAgregarProducto.setEnabled(false);
 
         String[] listaProductos = getResources().getStringArray(R.array.listaProductos);
-        productoDao.cargarDatos(listaProductos);
-        this.adaptadorLista = new ArrayAdapter<>(DetallePedidoActivity.this,android.R.layout.simple_list_item_single_choice,this.productoDao.listarMenu());
+       // productoDao.cargarDatos(listaProductos);
         listaMenu = (ListView) findViewById(R.id.listaProductos);
-        listaMenu.setAdapter(this.adaptadorLista);
-        listaMenu.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                List<ProductoMenu> listaProductos =productoDao.listarMenu();
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        adaptadorLista = new ArrayAdapter<>(DetallePedidoActivity.this,android.R.layout.simple_list_item_single_choice,listaProductos );
+                        listaMenu.setAdapter(adaptadorLista);
+                        listaMenu.setChoiceMode(ListView.CHOICE_MODE_SINGLE);                    }
+                });
+            }
+        };
+        Thread hiloBuscarDatos = new Thread(r);
+        hiloBuscarDatos.start();
 
         listaMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

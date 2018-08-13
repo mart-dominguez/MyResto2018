@@ -3,6 +3,12 @@ package ofa.cursos.android.app02.myresto.modelo;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 public class ProductoMenu implements Parcelable{
     private int id;
     private String nombre;
@@ -64,5 +70,15 @@ public class ProductoMenu implements Parcelable{
     @Override
     public String toString() {
         return this.nombre + " - " + this.precio ;
+    }
+
+    public void loadFromJson(JSONObject elProducto ){
+        try {
+            this.setId(elProducto.getInt("id"));
+            this.setNombre(elProducto.getString("nombre"));
+            this.setPrecio(elProducto.getDouble("precio"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
